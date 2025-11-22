@@ -19,7 +19,6 @@ class UserController(Controller):
             user_service: UserService,
             user_id: int = Parameter(gt=0),
     ) -> UserResponse:
-        """Получить пользователя по ID"""
         user = await user_service.get_by_id(user_id)
         if not user:
             raise NotFoundException(detail=f"User with ID {user_id} not found")
@@ -34,7 +33,6 @@ class UserController(Controller):
             username: Optional[str] = None,
             email: Optional[str] = None,
     ) -> List[UserResponse]:
-        """Получить список пользователей с пагинацией и фильтрацией"""
         filters = {}
         if username:
             filters["username"] = username
